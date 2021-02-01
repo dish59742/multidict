@@ -152,12 +152,12 @@ jobs:
     strategy:
       matrix:
         pyver: [cp36-cp36m, cp37-cp37m, cp38-cp38, cp39-cp39]
-        arch: [x86_64, aarch64, i686, ppc64le, s390x]
+        arch: [aarch64]
       fail-fast: false
     runs-on: ubuntu-latest
     env:
       py: /opt/python/${{ matrix.pyver }}/bin/python
-      img: quay.io/pypa/manylinux2014_${{ matrix.arch }}
+      img: dockcross/manylinux2014-${{ matrix.arch }}
     needs: pre-deploy
     steps:
     - name: Checkout
