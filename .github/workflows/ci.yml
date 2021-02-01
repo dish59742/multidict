@@ -158,7 +158,7 @@ jobs:
     env:
       py: /opt/python/${{ matrix.pyver }}/bin/python
       img: dockcross/manylinux2014-${{ matrix.arch }}
-    needs: pre-deploy
+    #needs: pre-deploy
     steps:
     - name: Checkout
       uses: actions/checkout@v2
