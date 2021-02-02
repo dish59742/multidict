@@ -170,7 +170,7 @@ jobs:
     - name: print arch
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-          ${{ env.img }} uname -m
+          ${{ env.img }} export LDSHARED='aarch64-none-linux-gnu-gcc -pthread -shared'
     - name: install tools
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
@@ -178,7 +178,10 @@ jobs:
     - name: Make wheel
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-          ${{ env.img }} ${{ env.py }} setup.py bdist_wheel
+          ${{ env.img }} ${{ env.py }}  \
+          bash -c '\
+          export LDSHARED="aarch64-none-linux-gnu-gcc -pthread -shared" && \
+          setup.py bdist_wheel'
     - name: Repair wheel wheel
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
