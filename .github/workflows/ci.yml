@@ -174,14 +174,16 @@ jobs:
     - name: install tools
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-          ${{ env.img }} ${{ env.py }} -m pip install -U setuptools wheel
+          ${{ env.img }} ${{ env.py }} -m pip install -U setuptools wheel pytest
     - name: Make wheel
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
           bash -c '\
           export LDSHARED="aarch64-unknown-linux-gnueabi-gcc -pthread -shared" && \
-          ${{ env.py }} setup.py bdist_wheel --plat-name=manylinux2014_aarch64'
+          #${{ env.py }} setup.py bdist_wheel --plat-name=manylinux2014_aarch64
+          ${{ env.py }} setup.py install && \
+          pytest'
     - name: Repair wheel wheel
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
