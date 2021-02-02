@@ -180,7 +180,7 @@ jobs:
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} \
           bash -c '\
-          export LDSHARED="aarch64-none-linux-gnu-gcc -pthread -shared" && \
+          export LDSHARED="aarch64-unknown-linux-gnueabi-gcc -pthread -shared" && \
           ${{ env.py }} setup.py bdist_wheel'
     - name: Repair wheel wheel
       run: |
