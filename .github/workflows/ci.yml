@@ -181,7 +181,7 @@ jobs:
           ${{ env.img }} \
           bash -c '\
           export LDSHARED="aarch64-unknown-linux-gnueabi-gcc -pthread -shared" && \
-          ${{ env.py }} setup.py --plat-name manylinux2014_aarch64 bdist_wheel'
+          ${{ env.py }} setup.py bdist_wheel --plat-name=manylinux2014_aarch64'
     - name: Repair wheel wheel
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
