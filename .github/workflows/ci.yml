@@ -162,11 +162,18 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Set up QEMU
-      id: qemu
-      uses: docker/setup-qemu-action@v1
-    - name: Available platforms
-      run: echo ${{ steps.qemu.outputs.platforms }}
+    #- name: Set up QEMU
+     # id: qemu
+     # uses: docker/setup-qemu-action@v1
+    #- name: Available platforms
+     # run: echo ${{ steps.qemu.outputs.platforms }}
+    - name: print arch
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+          ${{ env.img }} uname -m
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+          ${{ env.img }} ${{ env.py }} -m pip install -U setuptools wheel
     - name: Install tools
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
