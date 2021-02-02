@@ -170,8 +170,7 @@ jobs:
     - name: print arch
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-          ${{ env.img }} export LDSHARED='aarch64-none-linux-gnu-gcc -pthread -shared'
-    - name: install tools
+          ${{ env.img }} uname -m
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
           ${{ env.img }} ${{ env.py }} -m pip install -U setuptools wheel
