@@ -185,7 +185,7 @@ jobs:
     - name: Repair wheel wheel
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-          ${{ env.img }} auditwheel repair dist/*.whl --wheel-dir wheelhouse/
+          ${{ env.img }} auditwheel repair --plat "manylinux2014_aarch64"  dist/*.whl --wheel-dir wheelhouse/
     - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
