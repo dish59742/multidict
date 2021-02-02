@@ -181,7 +181,7 @@ jobs:
           ${{ env.img }} \
           bash -c '\
           export LDSHARED="aarch64-unknown-linux-gnueabi-gcc -pthread -shared" && \
-          yum install pytest && \
+          yum install -y pytest && \
           #${{ env.py }} setup.py bdist_wheel --plat-name=manylinux2014_aarch64
           ${{ env.py }} setup.py install && \
           pytest'
